@@ -109,9 +109,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contacts
 
-Steve Ramirez - stevearamirez@gmail.com
-Aidan Guimond - 
-Sam Kachergius - skachergius@gmail.com
+- Steve Ramirez - stevearamirez@gmail.com
+- Aidan Guimond - 
+- Sam Kachergius - skachergius@gmail.com
 
 Project Link: [https://github.com/aaguimond/module23-24-project3-recipe-sharing-site](https://github.com/aaguimond/module23-24-project3-recipe-sharing-site)
 
