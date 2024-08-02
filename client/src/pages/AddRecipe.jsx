@@ -9,3 +9,5 @@ const AddRecipe = () => {
         </div>
     );
 };
+
+export default AddRecipe;
