@@ -1,12 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { extensions } = require('sequelize/lib/utils/validator-extras');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: './src/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -14,14 +15,30 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                // match any js or jsx files
+                test: /\.(jsx?)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader'
                 },
             },
             {
-            
+                // match any css files
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                // match any common image file formats
+                test: /\.(png|jpe?g|gif|svg)$/,
+                user: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'assets/images/',
+                        },
+                    },
+                ],
             },
         ],
     },
@@ -30,5 +47,14 @@ module.exports = {
             template: './public/index.html',
             favicon: './public/favicon.ico',
         }),
+        new Dotenv(),
     ],
+    // defining dev server attributes
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 3000,
+        historyApiFallback: true,
+    },
+    mode: process.env.MODE || 'development',
 };
