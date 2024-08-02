@@ -5,6 +5,13 @@ const Header = () => {
     // Get the token from local storage
     const token = localStorage.getItem('token');
 
+    // handle logout
+    const handleLogout = () => {
+        // removing token from storage and reloading page upon logout
+        localStorage.removeItem('token');
+        window.location.reload();
+    };
+
     return (
         <header>
             <nav>
@@ -14,7 +21,7 @@ const Header = () => {
                     <>
                         {/* If the user is logged in, show the create recipe link and logout button */}
                         <Link to="/create-recipe">Create Recipe</Link>
-                        <button onClick={() => localStorage.removeItem('token')}>Logout</button>
+                        <button onClick={handleLogout}>Logout</button>
                     </>
                 ) : (
                     <>
