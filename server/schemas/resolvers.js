@@ -9,7 +9,7 @@ const resolvers = {
     Query: {
         // Resolver for fetching all recipes
         getRecipes: async () => {
-            return await Recipe.find().populate('createdBy')
+            return await Recipe.find().populate('author')
         },
     },
     Mutation: {
@@ -23,7 +23,7 @@ const resolvers = {
         // Resolver for logging in a user
         login: async (_, { email, password }) => {
             const user = await User.findOne({ email });
-            if (!user || !(await user.comparePassword(password))) {
+            if (!user || !(await user.isCorrectPassword(password))) {
                 throw new AuthenticationError('Invalid Credentials')
             }
             const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
@@ -36,10 +36,10 @@ const resolvers = {
                 title,
                 ingredients,
                 instructions,
-                createdBy: context.user.id,
+                author: context.user.id,
             });
             await recipe.save();
-            return recipe.populate('createdBy').execPopulate();
+            return recipe.populate('author').execPopulate();
         },
     },
 };
