@@ -1,18 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
-
-// Define the GraphQL mutation for creating a new recipe
-const CREATE_RECIPE = gql`
-  mutation CreateRecipe($title: String!, $ingredients: [IngredientInput!]!, $instructions: String!) {
-    createRecipe(title: $title, ingredients: $ingredients, instructions: $instructions) {
-      id
-      title
-      author {
-        username
-      }
-    }
-  }
-`;
+import { CREATE_RECIPE } from '../graphql/mutations';
 
 const RecipeForm = () => {
   // Define state variables for the form inputs
