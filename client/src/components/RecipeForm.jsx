@@ -3,11 +3,11 @@ import { useMutation, gql } from '@apollo/client';
 
 // Define the GraphQL mutation for creating a new recipe
 const CREATE_RECIPE = gql`
-  mutation CreateRecipe($title: String!, $ingredients: [String!]!, $instructions: String!) {
+  mutation CreateRecipe($title: String!, $ingredients: [IngredientInput!]!, $instructions: String!) {
     createRecipe(title: $title, ingredients: $ingredients, instructions: $instructions) {
       id
       title
-      createdBy {
+      author {
         username
       }
     }
@@ -17,7 +17,7 @@ const CREATE_RECIPE = gql`
 const RecipeForm = () => {
   // Define state variables for the form inputs
   const [title, setTitle] = useState('');
-  const [ingredients, setIngredients] = useState('');
+  const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
   const [instructions, setInstructions] = useState('');
 
   // Create a mutation function using the defined GraphQL mutation
@@ -31,15 +31,27 @@ const RecipeForm = () => {
     await createRecipe({
       variables: {
         title,
-        ingredients: ingredients.split(','), // Split ingredients string into an array
+        ingredients,
         instructions,
       },
     });
 
     // Clear the form inputs after submission
     setTitle('');
-    setIngredients('');
+    setIngredients([{ name: '', quantity: '' }]);
     setInstructions('');
+  };
+
+  // handling change for ingredient inputs
+  const handleIngredientChange = (index, field, value) => {
+    const newIngredients = [...ingredients];
+    newIngredients[index][field] = value;
+    setIngredients(newIngredients);
+  };
+
+  // add a new ingredient input
+  const addIngredient = () => {
+    setIngredients([...ingredients, { name: '', quantity: '' }]);
   };
 
   return (
@@ -53,12 +65,25 @@ const RecipeForm = () => {
       />
 
       {/* Input for the recipe ingredients */}
-      <input
-        type="text"
-        placeholder="Ingredients (comma separated)"
-        value={ingredients}
-        onChange={(e) => setIngredients(e.target.value)}
-      />
+      {ingredients.map((ingredient, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            placeholder="Ingredient Name"
+            value={ingredient.name}
+            onChange={(e) => handleIngredientChange(index, 'name', e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Quantity"
+            value={ingredient.quantity}
+            onChange={(e) => handleIngredientChange(index, 'quantity', e.target.value)}
+          />
+        </div>
+      ))}
+
+      {/* Button to add a new ingredient input */}
+      <button type="button" onClick={addIngredient}>Add Another Ingredient</button>
 
       {/* Textarea for the recipe instructions */}
       <textarea
@@ -74,4 +99,3 @@ const RecipeForm = () => {
 };
 
 export default RecipeForm;
-
