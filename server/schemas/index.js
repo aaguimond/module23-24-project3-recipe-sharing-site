@@ -14,7 +14,7 @@ const typeDefs = gql`
         title: String!
         ingredients: [String!]!
         instructions: String!
-        createdBy: User!
+        author: User!
     }
     
     type Query {
