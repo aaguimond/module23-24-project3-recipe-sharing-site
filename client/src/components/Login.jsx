@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../graphql/mutations';
+import { saveToken } from '../utils/auth';
 
 const Login = ({ history }) => {
     // Defining our setEmail method
@@ -13,7 +14,7 @@ const Login = ({ history }) => {
     const [login, { loading, error }] = useMutation(LOGIN_USER, {
         // once finished, give the user a token and redirect to the home page
         onCompleted: (data) => {
-            localStorage.setItem('token', data.login.token);
+            saveToken(data.login.token);
             history.push('/');
         }
     });

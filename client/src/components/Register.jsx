@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { REGISTER_USER } from '../graphql/mutations';
+import { saveToken } from '../utils/auth';
 
 const Register = ({ history }) => {
     // Defining our setUsername method
@@ -16,7 +17,7 @@ const Register = ({ history }) => {
     const [register, { loading, error }] = useMutation(REGISTER_USER, {
         // once finished, give the user a token and redirect to the home page
         onCompleted: (data) => {
-            localStorage.setItem('token', data.register.token);
+            saveToken(data.register.token);
             history.push('/');
         }
     });

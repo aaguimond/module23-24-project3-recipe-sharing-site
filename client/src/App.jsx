@@ -7,6 +7,8 @@ import AddRecipe from './pages/AddRecipe';
 import Login from './components/Login';
 import Register from './components/Register';
 import Auth from './components/Auth';
+import Profile from './pages/Profile';
+import Recipe from './pages/Recipe';
 
 const App = () => {
     return (
@@ -16,6 +18,8 @@ const App = () => {
                 <Route exact path="/" component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
+                <Route path="/profile" component={Profile} />
+                <Route path="/recipe/:id" component={Recipe} />
                 <Auth path="/create-recipe" component={AddRecipe} />
             </Switch>
             <Footer />

@@ -11,6 +11,28 @@ const resolvers = {
         getRecipes: async () => {
             return await Recipe.find().populate('author')
         },
+
+        // Resolver to fetch a user and their authored recipes
+        userProfile: async (_, __, { user }) => {
+            // throw error if no user
+            if (!user) {
+                throw new AuthenticationError('You must be logged in');
+            }
+            // Grab user by ID and their authored recipes
+            const userProfile = await User.findById(user.id).populate('recipes');
+            return userProfile;
+        },
+
+        // Resolver to fetch a recipe by its ID
+        recipe: async (_, { id }) => {
+            // Grab recipe by ID and get the author's username
+            const recipe = await Recipe.findById(id).populate('author', 'username');
+            // throw error if no recipe found
+            if (!recipe) {
+                throw new Error('Recipe not found');
+            }
+            return recipe;
+        },
     },
     Mutation: {
         // Resolver for registering a new user
