@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 // Define the GraphQL mutation for creating a new recipe
-const CREATE_RECIPE = gql`
+export const CREATE_RECIPE = gql`
   mutation CreateRecipe($title: String!, $ingredients: [IngredientInput!]!, $instructions: String!) {
     createRecipe(title: $title, ingredients: $ingredients, instructions: $instructions) {
       id

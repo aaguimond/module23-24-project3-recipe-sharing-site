@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CREATE_RECIPE } from '../graphql/mutations';
 
 const RecipeForm = () => {

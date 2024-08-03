@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { isLoggedIn, logout } from '../utils/auth';
 
 const Header = () => {
     // Get the token from local storage
-    const token = localStorage.getItem('token');
+    const token = isLoggedIn();
 
     // handle logout
     const handleLogout = () => {
         // removing token from storage and reloading page upon logout
-        localStorage.removeItem('token');
+        logout();
         window.location.reload();
     };
 
