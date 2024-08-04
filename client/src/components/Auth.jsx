@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Navigate, Route } from 'react-router-dom';
 
 // Higher-order component for protecting routes
 const Auth = ({ component: Component, ...rest }) => {
@@ -8,7 +8,7 @@ const Auth = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={props =>
-                token ? <Component {...props} /> : <Redirect to="/login" />
+                token ? <Component {...props} /> : <Navigate to="/login" />
             }
         />
     );

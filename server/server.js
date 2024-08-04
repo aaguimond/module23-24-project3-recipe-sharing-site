@@ -5,10 +5,11 @@ const resolvers = require('./schemas/resolvers');
 const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const { authMiddleware } = require('./middleware/authMiddleware');
 
 dotenv.config();
 
-const app = exress();
+const app = express();
 const PORT = process.env.PORT || 3000;
 
 connectDB();
@@ -22,7 +23,8 @@ const server = new ApolloServer({
     resolvers,
     context: ({ req }) => {
         const token = req.headers.authorization || '';
-        return { token };
+        const user = authMiddleware(token);
+        return { user };
     },
 });
 

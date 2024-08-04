@@ -12,7 +12,7 @@ import App from "./App";
 
 // Create a http link to GraphQL server
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000/graphql",
+  uri: "http://localhost:3000/graphql",
 });
 
 // Create middleware link to set the HTTP headers for each request
@@ -34,9 +34,9 @@ const client = new ApolloClient({
 
 // Render the React application and wrap it with ApolloProvider to... 
 // ...make ApolloClient available throughout the entire application
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
     <ApolloProvider client ={client}>
         <App />
-    </ApolloProvider>,
-    document.getElementById('root')
+    </ApolloProvider>
 );
