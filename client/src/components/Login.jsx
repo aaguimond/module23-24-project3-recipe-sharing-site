@@ -41,12 +41,15 @@ const Login = ({ history }) => {
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <input
+                    name="email"
                     type="email"
                     placeholder="Email"
                     value={email}
+                    autoComplete="true"
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
+                    name="password"
                     type="password"
                     placeholder="Password"
                     value={password}

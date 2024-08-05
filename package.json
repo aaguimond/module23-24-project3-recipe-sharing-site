@@ -2,13 +2,14 @@
   "name": "module23-24-group-project-03",
   "version": "1.0.0",
   "description": "Recipe sharing website",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
     "client": "cd client && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node server/utils/seed.js"
   },
   "repository": {
     "type": "git",

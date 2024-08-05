@@ -30,7 +30,7 @@ module.exports = {
             {
                 // match any common image file formats
                 test: /\.(png|jpe?g|gif|svg)$/,
-                user: [
+                use: [
                     {
                         loader: 'file-loader',
                         options: {
@@ -47,13 +47,15 @@ module.exports = {
             template: './public/index.html',
             favicon: './public/favicon.ico',
         }),
-        new Dotenv(),
+        new Dotenv({
+            path: path.resolve(__dirname, '../.env'),
+        }),
     ],
     // defining dev server attributes
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        static: path.join(__dirname, 'dist'),
         compress: true,
-        port: 3000,
+        port: 3001,
         historyApiFallback: true,
     },
     mode: process.env.MODE || 'development',
