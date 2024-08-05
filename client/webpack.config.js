@@ -47,7 +47,9 @@ module.exports = {
             template: './public/index.html',
             favicon: './public/favicon.ico',
         }),
-        new Dotenv(),
+        new Dotenv({
+            path: path.resolve(__dirname, '../.env'),
+        }),
     ],
     // defining dev server attributes
     devServer: {

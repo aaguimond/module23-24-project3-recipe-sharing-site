@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 // Import necessary modules from Apollo Client
 import {
   ApolloProvider,
@@ -34,9 +34,10 @@ const client = new ApolloClient({
 
 // Render the React application and wrap it with ApolloProvider to... 
 // ...make ApolloClient available throughout the entire application
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
 root.render(
-    <ApolloProvider client ={client}>
+    <ApolloProvider client={client}>
         <App />
     </ApolloProvider>
 );

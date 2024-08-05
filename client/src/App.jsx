@@ -15,16 +15,12 @@ const App = () => {
         <Router>
             <Header />
             <Routes>
-                <Route exact path="/" component={Home} />
-                <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
-                <Route path="/profile" component={Profile} />
-                <Route path="/recipe/:id" component={Recipe} />
-                <Route path="/create-recipe" 
-                    element={
-                        <Auth component={AddRecipe} />
-                    }
-                />
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/recipe/:id" element={<Recipe />} />
+                <Route path="/create-recipe" element={<Auth component={AddRecipe} />} />
             </Routes>
             <Footer />
         </Router>

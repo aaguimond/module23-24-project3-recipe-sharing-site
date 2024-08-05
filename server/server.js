@@ -29,7 +29,7 @@ const server = new ApolloServer({
 });
 
 server.start()
-    .then(res => {
+    .then(() => {
         server.applyMiddleware({ app });
 
         app.listen(PORT, () => {

@@ -4,7 +4,6 @@
   "description": "Recipe sharing website",
   "main": "server/server.js",
   "scripts": {
-    "install": "npm install && cd client && npm install && cd ..",
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "cd client && npm start",
