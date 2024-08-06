@@ -280,8 +280,7 @@ const seedDB = async () => {
         // create users in db with below function
         const userPromises = users.map(async (user) => {
             // hash passwords using bcrypt
-            const hashedPassword = await bcrypt.hash(user.password, 10);
-            return User.create({ ...user, password: hashedPassword });
+            return User.create({ ...user });
         });
 
         // create users in db with above function

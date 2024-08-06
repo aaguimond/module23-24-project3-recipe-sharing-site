@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { REGISTER_USER } from '../graphql/mutations';
 import { saveToken } from '../utils/auth';
+import { useNavigate } from 'react-router-dom';
 
-const Register = ({ history }) => {
+const Register = ({ setAuthenticated }) => {
     // Defining our setUsername method
     const [username, setUsername] = useState('');
 
@@ -18,9 +19,11 @@ const Register = ({ history }) => {
         // once finished, give the user a token and redirect to the home page
         onCompleted: (data) => {
             saveToken(data.register.token);
-            history.push('/');
+            setAuthenticated(true);
+            navigate('/')
         }
     });
+    const navigate = useNavigate('/');
 
     // Defining our handleSubmit function to pass the variables when the user submits the register form
     // to the register function
