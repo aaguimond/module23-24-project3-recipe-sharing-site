@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../graphql/mutations';
 import { saveToken } from '../utils/auth';
+import { useNavigate } from 'react-router-dom';
 
-const Login = ({ history }) => {
+const Login = ({ setAuthenticated }) => {
     // Defining our setEmail method
     const [email, setEmail] = useState('');
 
@@ -15,9 +16,11 @@ const Login = ({ history }) => {
         // once finished, give the user a token and redirect to the home page
         onCompleted: (data) => {
             saveToken(data.login.token);
-            history.push('/');
+            setAuthenticated(true);
+            navigate('/');
         }
     });
+    const navigate = useNavigate();
 
     // Defining our handleSubmit function to pass the variables when the user submits the login form
     // to the login function

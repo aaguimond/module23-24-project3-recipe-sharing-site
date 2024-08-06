@@ -1,5 +1,6 @@
 // Importing Required Models
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs')
 const User = require('../models/User');
 const Recipe = require('../models/Recipe');
 const { AuthenticationError } = require('apollo-server-express');
@@ -73,15 +74,27 @@ const resolvers = {
                 throw new Error('Error registering user');
             }
         },
+
         // Resolver for logging in a user
         login: async (_, { email, password }) => {
             console.log('Logging in user:', email);
             try {
                 const user = await User.findOne({ email });
-                if (!user || !(await user.isCorrectPassword(password))) {
+                console.log(`User found: ${user}`);
+
+                if (!user) {
                     console.error('Invalid credentials');
                     throw new AuthenticationError('Invalid Credentials');
                 }
+
+                const isMatch = await bcrypt.compare(password, user.password);
+                console.log(`Comparing passwords: Entered - ${password}, Stored - ${user.password}, Match - ${isMatch}`);
+
+                if (!isMatch) {
+                    console.error('Invalid credentials');
+                    throw new AuthenticationError('Invalid Credentials');
+                }
+
                 const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
                 console.log('User logged in:', user);
                 return { id: user.id, username: user.username, email: user.email, token};
@@ -90,6 +103,7 @@ const resolvers = {
                 throw new Error('Error logging in user');
             }
         },
+
         // Resolver for creating a new recipe
         createRecipe: async (_, { title, ingredients, instructions }, context) =>{
             console.log('Creating new recipe:', title);
