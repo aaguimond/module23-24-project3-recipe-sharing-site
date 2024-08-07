@@ -9,6 +9,7 @@ import Register from './components/Register';
 import Auth from './components/Auth';
 import Profile from './pages/Profile';
 import Recipe from './pages/Recipe';
+import Dashboard from './pages/Dashboard'; // Import Dashboard component
 import { isLoggedIn, logout } from './utils/auth';
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/recipe/:id" element={<Recipe />} />
                 <Route path="/create-recipe" element={<Auth component={AddRecipe} />} />
+                <Route path="/dashboard" element={<Auth component={Dashboard} />} /> {/* Add this line */}
             </Routes>
             <Footer />
         </Router>

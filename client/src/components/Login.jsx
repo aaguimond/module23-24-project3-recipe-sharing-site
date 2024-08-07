@@ -17,7 +17,7 @@ const Login = ({ setAuthenticated }) => {
         onCompleted: (data) => {
             saveToken(data.login.token);
             setAuthenticated(true);
-            navigate('/');
+            navigate('/dashboard');
         }
     });
     const navigate = useNavigate();

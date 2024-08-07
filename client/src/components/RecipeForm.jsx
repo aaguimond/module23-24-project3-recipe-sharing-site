@@ -15,19 +15,26 @@ const RecipeForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
-    // Execute the mutation with the input values
-    await createRecipe({
-      variables: {
-        title,
-        ingredients,
-        instructions,
-      },
-    });
+    try {
+      // Execute the mutation with the input values
+      const { data } = await createRecipe({
+        variables: {
+          title,
+          ingredients,
+          instructions,
+        },
+      });
+      
+      console.log('Recipe creation response:', data);
 
-    // Clear the form inputs after submission
-    setTitle('');
-    setIngredients([{ name: '', quantity: '' }]);
-    setInstructions('');
+      // Clear the form inputs after submission  
+      setTitle('');
+      setIngredients([{ name: '', quantity: '' }]);
+      setInstructions('');
+
+    } catch (err) {
+      console.error('Error creating recipe:', err);
+    }
   };
 
   // handling change for ingredient inputs

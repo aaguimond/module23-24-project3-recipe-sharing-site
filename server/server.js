@@ -22,9 +22,10 @@ app.use(express.urlencoded({ extended: true }));
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req }) => {
+    context: async ({ req }) => {
         const token = req.headers.authorization || '';
-        const user = authMiddleware(token);
+        const user = await authMiddleware(token);
+        console.log('User in context:', user);
         return { user };
     },
 });

@@ -13,6 +13,23 @@ export const CREATE_RECIPE = gql`
   }
 `;
 
+export const UPDATE_RECIPE = gql`
+  mutation UpdateRecipe($id: ID!, $title: String!, $ingredients: [IngredientInput!]!, $instructions: String!) {
+    updateRecipe(id: $id, title: $title, ingredients: $ingredients, instructions: $instructions) {
+      id
+      title
+      ingredients {
+        name
+        quantity
+      }
+      instructions
+      author {
+        username
+      }
+    }
+  }
+`;
+
 // mutation for registration
 export const REGISTER_USER = gql`
     mutation Register($username: String!, $email: String!, $password: String!) {

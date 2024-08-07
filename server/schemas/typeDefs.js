@@ -15,6 +15,7 @@ const typeDefs = gql`
         ingredients: [Ingredient!]!
         instructions: String!
         author: User!
+        createdAt: String!
     }
 
     input IngredientInput {
@@ -27,8 +28,14 @@ const typeDefs = gql`
         quantity: String!
     }
 
+    type RecipeWithCount {
+        recipes: [Recipe]
+        totalCount: Int
+    }
+
     type Query {
-        getRecipes: [Recipe]
+        getRecipes(limit: Int, offset: Int): RecipeWithCount
+        getUserRecipes(limit: Int, offset: Int): RecipeWithCount
         userProfile: User
         recipe(id: ID!): Recipe
     }
