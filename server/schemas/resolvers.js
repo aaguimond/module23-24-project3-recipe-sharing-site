@@ -9,17 +9,45 @@ const { AuthenticationError } = require('apollo-server-express');
 const resolvers = {
     Query: {
         // Resolver for fetching all recipes
-        getRecipes: async () => {
-            console.log('Fetching all recipes');
+        getRecipes: async (_, { limit = 10, offset = 0 }) => {
             try {
-                const recipes = await Recipe.find().populate('author')
-                console.log('Fetched recipes:', recipes);
-                return recipes;
+                const recipes = await Recipe.find()
+                    .sort({ createdAt: -1 })
+                    .skip(offset)
+                    .limit(limit)
+                    .populate('author', 'username');
+        
+                const totalCount = await Recipe.countDocuments();
+        
+                return { recipes, totalCount };
             } catch (err) {
                 console.error('Error fetching recipes:', err);
                 throw new Error('Error fetching recipes');
             }
-            
+        },        
+
+        getUserRecipes: async (_, { limit = 10, offset = 0 }, context) => {
+            console.log('Fetching user recipes with limit:', limit, 'and offset:', offset);
+            //
+            if (!context.user) {
+                throw new AuthenticationError('You must be logged in to do that');
+            }
+
+            try {
+                const recipes = await Recipe.find({ author: context.user._id })
+                    .sort({ createdAt: -1 })
+                    .skip(offset)
+                    .limit(limit)
+                    .populate('author', 'username');
+
+                const totalCount = await Recipe.countDocuments({ author: context.user._id });
+
+                console.log('Fetched user recipes:', recipes);
+                return { recipes, totalCount };
+            } catch (err) {
+                console.error('Error fetching user recipes:', err);
+                throw new Error('Error fetching user recipes');
+            }
         },
 
         // Resolver to fetch a user and their authored recipes
@@ -107,6 +135,7 @@ const resolvers = {
         // Resolver for creating a new recipe
         createRecipe: async (_, { title, ingredients, instructions }, context) =>{
             console.log('Creating new recipe:', title);
+            console.log('User in context:', context.user);
             if (!context.user) {
                 console.error('User not logged in');
                 throw new AuthenticationError('You must be logged in');
@@ -119,8 +148,9 @@ const resolvers = {
                     author: context.user.id,
                 });
                 await recipe.save();
+                await recipe.populate('author');
                 console.log('Recipe created:', recipe);
-                return recipe.populate('author').execPopulate();
+                return recipe;
             } catch (err) {
                 console.error('Error creating recipe:', err);
                 throw new Error('Error creating recipe');

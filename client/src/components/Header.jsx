@@ -11,6 +11,7 @@ const Header = ({ authenticated, handleLogout }) => {
                     <>
                         {/* If the user is logged in, show the create recipe link and logout button */}
                         <Link to="/create-recipe">Create Recipe</Link>
+                        <Link to="/dashboard">Dashboard</Link>
                         <button onClick={handleLogout}>Logout</button>
                     </>
                 ) : (
