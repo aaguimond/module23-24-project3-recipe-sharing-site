@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_USER_PROFILE } from '../graphql/queries';
+import './Profile.css'
 
 // Render a user's profile
 const Profile = () => {

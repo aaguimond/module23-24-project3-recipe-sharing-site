@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import RecipeList from '../components/RecipeList';
 import { useQuery } from '@apollo/client';
 import { GET_RECIPES } from '../graphql/queries';
+import './Home.css';
 
 const Home = () => {
     const [limit] = useState(10);
