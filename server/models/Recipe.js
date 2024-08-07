@@ -33,10 +33,6 @@ const recipeSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    updatedAt: {
-        type: Date,
-        default: Date.now,
-    }
 }, {
     // allow virtuals and getters
     toJSON: {
