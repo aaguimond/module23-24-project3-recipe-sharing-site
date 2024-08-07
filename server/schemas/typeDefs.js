@@ -44,6 +44,7 @@ const typeDefs = gql`
         register(username: String!, email: String!, password: String!): User
         login(email: String!, password: String!): User
         createRecipe(title: String!, ingredients: [IngredientInput!]!, instructions: String!): Recipe
+        deleteRecipe(id: ID!): Recipe
     }
 `;
 

@@ -30,6 +30,14 @@ export const UPDATE_RECIPE = gql`
   }
 `;
 
+export const DELETE_RECIPE = gql`
+  mutation DeleteRecipe($id: ID!) {
+    deleteRecipe(id: $id) {
+      id
+    }
+  }
+`;
+
 // mutation for registration
 export const REGISTER_USER = gql`
     mutation Register($username: String!, $email: String!, $password: String!) {

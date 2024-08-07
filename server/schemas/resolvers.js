@@ -156,6 +156,31 @@ const resolvers = {
                 throw new Error('Error creating recipe');
             }
         },
+
+        deleteRecipe: async (_, { id }, context) => {
+            console.log('Delete recipe resolver called with ID:', id);
+            if (!context.user) {
+                console.log('User not authenticated');
+                throw new AuthenticationError('You must be logged in to do that');
+            }
+
+            const recipe = await Recipe.findById(id);
+            if (!recipe) {
+                console.log('Recipe not found');
+                throw new Error('Recipe not found');
+            }
+
+            console.log('Recipe found:', recipe);
+
+            if (recipe.author.toString() !== context.user._id.toString()) {
+                console.log('User not authorized to delete this recipe');
+                throw new AuthenticationError('You are not authorized to delete this recipe');
+            }
+
+            await recipe.deleteOne();
+            console.log('Recipe deleted:', recipe.id);
+            return { id: recipe.id };
+        }
     },
 };
 
