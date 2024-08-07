@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_RECIPE } from '../graphql/mutations';
+import { useNavigate } from 'react-router-dom';
 
 const RecipeForm = () => {
   // Define state variables for the form inputs
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
   const [instructions, setInstructions] = useState('');
+  const navigate = useNavigate();
 
   // Create a mutation function using the defined GraphQL mutation
-  const [createRecipe] = useMutation(CREATE_RECIPE);
+  const [createRecipe] = useMutation(CREATE_RECIPE, {
+    onCompleted: () => {
+      navigate('/')
+    }
+  });
 
   // Handle form submission
   const handleSubmit = async (e) => {
