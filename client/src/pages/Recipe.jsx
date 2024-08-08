@@ -4,6 +4,7 @@ import { GET_RECIPE_BY_ID } from '../graphql/queries';
 import { DELETE_RECIPE } from '../graphql/mutations';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
+import './Recipe.css';
 
 const Recipe = () => {
     const { id } = useParams();
