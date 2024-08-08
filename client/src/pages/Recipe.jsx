@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_RECIPE_BY_ID, DELETE_RECIPE } from '../graphql/queries';
+import { GET_RECIPE_BY_ID } from '../graphql/queries';
+import { DELETE_RECIPE } from '../graphql/mutations';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
 import './Recipe.css';
