@@ -1,3 +1,4 @@
+// src/components/RecipeCard.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -5,24 +6,10 @@ import { Link } from 'react-router-dom';
 const RecipeCard = ({ recipe }) => {
     return (
         <div className="recipe-card">
-            <h2>
-                <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
-            </h2>
-            <p><strong>Author:</strong> {recipe.author.username}</p>
-            <div>
-                <strong>Ingredients:</strong>
-                <ul>
-                    {recipe.ingredients.map((ingredient, index) => (
-                        <li key={index}>
-                            {ingredient.name}: {ingredient.quantity}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <div>
-                <strong>Instructions:</strong>
-                <p>{recipe.instructions}</p>
-            </div>
+            <Link to={`/recipe/${recipe.id}`}>
+                <h2>{recipe.title}</h2>
+                <img src={recipe.image} alt={recipe.title} />
+            </Link>
         </div>
     );
 };

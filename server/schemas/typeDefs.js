@@ -1,6 +1,5 @@
 const { gql } = require('apollo-server-express');
 
-// Defining the GraphQL schema
 const typeDefs = gql`
     type User {
         id: ID!
@@ -15,6 +14,7 @@ const typeDefs = gql`
         ingredients: [Ingredient!]!
         instructions: String!
         author: User!
+        image: String!
         createdAt: String!
     }
 
@@ -43,7 +43,8 @@ const typeDefs = gql`
     type Mutation {
         register(username: String!, email: String!, password: String!): User
         login(email: String!, password: String!): User
-        createRecipe(title: String!, ingredients: [IngredientInput!]!, instructions: String!): Recipe
+        createRecipe(title: String!, ingredients: [IngredientInput!]!, instructions: String!, image: String): Recipe
+        updateRecipe(id: ID!, title: String!, ingredients: [IngredientInput!]!, instructions: String!, image: String): Recipe
         deleteRecipe(id: ID!): Recipe
     }
 `;

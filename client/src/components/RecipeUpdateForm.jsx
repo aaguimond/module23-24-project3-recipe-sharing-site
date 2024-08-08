@@ -1,37 +1,52 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { CREATE_RECIPE } from '../graphql/mutations';
+import React, { useState, useEffect } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_RECIPE_BY_ID } from '../graphql/queries';
+import { UPDATE_RECIPE } from '../graphql/mutations';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const RecipeForm = () => {
+const RecipeUpdateForm = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const { loading, error, data } = useQuery(GET_RECIPE_BY_ID, {
+    variables: { id },
+  });
+
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState([{ name: '', quantity: '' }]);
   const [instructions, setInstructions] = useState('');
   const [image, setImage] = useState('');
 
-  const [createRecipe] = useMutation(CREATE_RECIPE);
+  const [updateRecipe] = useMutation(UPDATE_RECIPE);
+
+  useEffect(() => {
+    if (data) {
+      const { recipe } = data;
+      setTitle(recipe.title);
+      setIngredients(recipe.ingredients);
+      setInstructions(recipe.instructions);
+      setImage(recipe.image);
+    }
+  }, [data]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const { data } = await createRecipe({
+      const { data } = await updateRecipe({
         variables: {
+          id,
           title,
-          ingredients,
+          ingredients: ingredients.map(({ name, quantity }) => ({ name, quantity })),
           instructions,
           image,
         },
       });
 
-      console.log('Recipe creation response:', data);
-
-      setTitle('');
-      setIngredients([{ name: '', quantity: '' }]);
-      setInstructions('');
-      setImage('');
-
+      console.log('Recipe update response:', data);
+      navigate(`/recipe/${id}`);
     } catch (err) {
-      console.error('Error creating recipe:', err);
+      console.error('Error updating recipe:', err);
     }
   };
 
@@ -44,6 +59,9 @@ const RecipeForm = () => {
   const addIngredient = () => {
     setIngredients([...ingredients, { name: '', quantity: '' }]);
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -81,9 +99,9 @@ const RecipeForm = () => {
         value={image}
         onChange={(e) => setImage(e.target.value)}
       />
-      <button type="submit">Create Recipe</button>
+      <button type="submit">Update Recipe</button>
     </form>
   );
 };
 
-export default RecipeForm;
+export default RecipeUpdateForm;

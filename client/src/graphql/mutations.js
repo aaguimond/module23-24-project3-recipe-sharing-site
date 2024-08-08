@@ -13,6 +13,7 @@ export const CREATE_RECIPE = gql`
   }
 `;
 
+// Define the GraphQL mutation for updating a recipe
 export const UPDATE_RECIPE = gql`
   mutation UpdateRecipe($id: ID!, $title: String!, $ingredients: [IngredientInput!]!, $instructions: String!) {
     updateRecipe(id: $id, title: $title, ingredients: $ingredients, instructions: $instructions) {
