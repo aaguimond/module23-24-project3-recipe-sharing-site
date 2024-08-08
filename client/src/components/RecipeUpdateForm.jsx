@@ -60,7 +60,7 @@ const RecipeUpdateForm = () => {
     setIngredients([...ingredients, { name: '', quantity: '' }]);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (

@@ -9,7 +9,7 @@ const Profile = () => {
     const { loading, error, data } = useQuery(GET_USER_PROFILE);
 
     // Displaying loading and error messages if needed
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
     if (error) return <p>Error: {error.message}</p>
 
     // Grabbing username and recipes from fetched data
@@ -17,7 +17,7 @@ const Profile = () => {
 
     // Returning html
     return (
-        <div>
+        <div className="container">
             <h1>{username}'s Profile</h1>
             <h2>{username}'s Recipes</h2>
             <ul>

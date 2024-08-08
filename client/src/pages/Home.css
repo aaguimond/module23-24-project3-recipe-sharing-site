@@ -39,3 +39,9 @@ button {
 button:hover {
     background-color: #133bb5;
 }
+
+@media screen and (width < 800px) {
+    .recipe-card {
+        min-width: 80%
+    }
+}
