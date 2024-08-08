@@ -6,6 +6,7 @@ export const GET_RECIPES = gql`
             recipes {
                 id
                 title
+                image
                 ingredients {
                     name
                     quantity
@@ -27,6 +28,7 @@ export const GET_USER_RECIPES = gql`
             recipes {
                 id
                 title
+                image
                 ingredients {
                     name
                     quantity
@@ -67,6 +69,7 @@ export const GET_RECIPE_BY_ID = gql`
         recipe(id: $id) {
             id
             title
+            image
             ingredients {
                 name
                 quantity

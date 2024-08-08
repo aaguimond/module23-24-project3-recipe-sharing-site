@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_USER_RECIPES } from '../graphql/queries';
-import RecipeCard from '../components/RecipeCard';
+import RecipeList from '../components/RecipeList';
 
 const Dashboard = () => {
     const [limit] = useState(10);
@@ -51,11 +51,7 @@ const Dashboard = () => {
     return (
         <div>
             <h1>Your Recipes</h1>
-            <div className="recipe-list">
-                {userRecipes.map((recipe) => (
-                    <RecipeCard key={recipe.id} recipe={recipe} />
-                ))}
-            </div>
+            <RecipeList recipes={userRecipes} />
             {!allUserRecipesLoaded && (
                 <button onClick={loadMore}>Load More</button>
             )}

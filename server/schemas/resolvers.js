@@ -1,14 +1,12 @@
-// Importing Required Models
+// server/schemas/resolvers.js
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Recipe = require('../models/Recipe');
 const { AuthenticationError } = require('apollo-server-express');
 
-// Resolver functions for GraphQL schema
 const resolvers = {
     Query: {
-        // Resolver for fetching all recipes
         getRecipes: async (_, { limit = 10, offset = 0 }) => {
             try {
                 const recipes = await Recipe.find()
@@ -28,7 +26,6 @@ const resolvers = {
 
         getUserRecipes: async (_, { limit = 10, offset = 0 }, context) => {
             console.log('Fetching user recipes with limit:', limit, 'and offset:', offset);
-            //
             if (!context.user) {
                 throw new AuthenticationError('You must be logged in to do that');
             }
@@ -50,16 +47,19 @@ const resolvers = {
             }
         },
 
-        // Resolver to fetch a user and their authored recipes
         userProfile: async (_, __, { user }) => {
             console.log('Fetching user profile');
-            // throw error if no user
             if (!user) {
                 throw new AuthenticationError('You must be logged in');
             }
             try {
-                // Grab user by ID and their authored recipes
-                const userProfile = await User.findById(user.id).populate('recipes');
+                const userProfile = await User.findById(user._id).populate({
+                    path: 'recipes',
+                    populate: {
+                        path: 'author',
+                        select: 'username email'
+                    }
+                });
                 console.log('Fetched user profile:', userProfile);
                 return userProfile;
             } catch (err) {
@@ -68,13 +68,10 @@ const resolvers = {
             }
         },
 
-        // Resolver to fetch a recipe by its ID
         recipe: async (_, { id }) => {
             console.log('Fetching recipe by ID:', id);
             try {
-                // Grab recipe by ID and get the author's username
                 const recipe = await Recipe.findById(id).populate('author', 'username');
-                // throw error if no recipe found
                 if (!recipe) {
                     console.error('Recipe by ID not found');
                     throw new Error('Recipe not found');
@@ -88,13 +85,12 @@ const resolvers = {
         },
     },
     Mutation: {
-        // Resolver for registering a new user
         register: async (_, { username, email, password }) => {
             console.log('Registering new user:', email);
             try {
                 const user = new User({ username, email, password });
                 await user.save();
-                const token = jwt.sign({ userId: user.id}, process.env.JWT_SECRET);
+                const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
                 console.log('User registered:', user);
                 return { id: user.id, username: user.username, email: user.email, token };
             } catch (err) {
@@ -103,7 +99,6 @@ const resolvers = {
             }
         },
 
-        // Resolver for logging in a user
         login: async (_, { email, password }) => {
             console.log('Logging in user:', email);
             try {
@@ -125,19 +120,16 @@ const resolvers = {
 
                 const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
                 console.log('User logged in:', user);
-                return { id: user.id, username: user.username, email: user.email, token};
+                return { id: user.id, username: user.username, email: user.email, token };
             } catch (err) {
                 console.error('Error logging in user:', err);
                 throw new Error('Error logging in user');
             }
         },
 
-        // Resolver for creating a new recipe
-        createRecipe: async (_, { title, ingredients, instructions }, context) =>{
+        createRecipe: async (_, { title, ingredients, instructions, image }, context) => {
             console.log('Creating new recipe:', title);
-            console.log('User in context:', context.user);
             if (!context.user) {
-                console.error('User not logged in');
                 throw new AuthenticationError('You must be logged in');
             }
             try {
@@ -145,7 +137,8 @@ const resolvers = {
                     title,
                     ingredients,
                     instructions,
-                    author: context.user.id,
+                    image: image || 'https://i.imgur.com/frqvKRY.jpeg',
+                    author: context.user._id,
                 });
                 await recipe.save();
                 await recipe.populate('author');
@@ -157,31 +150,55 @@ const resolvers = {
             }
         },
 
-        deleteRecipe: async (_, { id }, context) => {
-            console.log('Delete recipe resolver called with ID:', id);
+        updateRecipe: async (_, { id, title, ingredients, instructions, image }, context) => {
+            console.log('Updating recipe:', id);
             if (!context.user) {
-                console.log('User not authenticated');
-                throw new AuthenticationError('You must be logged in to do that');
+                throw new AuthenticationError('You must be logged in');
             }
-
-            const recipe = await Recipe.findById(id);
-            if (!recipe) {
-                console.log('Recipe not found');
-                throw new Error('Recipe not found');
+            try {
+                const recipe = await Recipe.findById(id);
+                if (!recipe) {
+                    throw new Error('Recipe not found');
+                }
+                if (recipe.author.toString() !== context.user._id.toString()) {
+                    throw new AuthenticationError('You are not authorized to update this recipe');
+                }
+                recipe.title = title;
+                recipe.ingredients = ingredients;
+                recipe.instructions = instructions;
+                recipe.image = image || recipe.image;
+                await recipe.save();
+                await recipe.populate('author');
+                console.log('Recipe updated:', recipe);
+                return recipe;
+            } catch (err) {
+                console.error('Error updating recipe:', err);
+                throw new Error('Error updating recipe');
             }
+        },
 
-            console.log('Recipe found:', recipe);
-
-            if (recipe.author.toString() !== context.user._id.toString()) {
-                console.log('User not authorized to delete this recipe');
-                throw new AuthenticationError('You are not authorized to delete this recipe');
+        deleteRecipe: async (_, { id }, context) => {
+            console.log('Deleting recipe:', id);
+            if (!context.user) {
+                throw new AuthenticationError('You must be logged in');
             }
-
-            await recipe.deleteOne();
-            console.log('Recipe deleted:', recipe.id);
-            return { id: recipe.id };
+            try {
+                const recipe = await Recipe.findById(id);
+                if (!recipe) {
+                    throw new Error('Recipe not found');
+                }
+                if (recipe.author.toString() !== context.user._id) {
+                    throw new AuthenticationError('You are not authorized to delete this recipe');
+                }
+                await recipe.deleteOne();
+                console.log('Recipe deleted:', recipe);
+                return recipe;
+            } catch (err) {
+                console.error('Error deleting recipe:', err);
+                throw new Error('Error deleting recipe');
+            }
         }
-    },
+    }
 };
 
 module.exports = resolvers;
