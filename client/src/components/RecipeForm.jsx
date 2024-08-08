@@ -54,7 +54,7 @@ const RecipeForm = () => {
         onChange={(e) => setTitle(e.target.value)}
       />
       {ingredients.map((ingredient, index) => (
-        <div key={index}>
+        <div className="ingredient-input" key={index}>
           <input
             type="text"
             placeholder="Ingredient Name"

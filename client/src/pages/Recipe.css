@@ -81,6 +81,10 @@ button:hover, .link-button:hover {
     width: 90%;
 }
 
+.ingredient-input {
+    display: flex;
+}
+
 @media screen and (width < 920px) {
     ul {
         columns: 2;
