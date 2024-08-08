@@ -19,6 +19,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, '../client/public')));
+
+// Logging middleware to log each request
+app.use((req, res, next) => {
+    console.log(`Received request for ${req.url}`);
+    next();
+});
+
 const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -39,11 +48,11 @@ server.start()
         // Handle API route for fetching recipes
         app.get('/recipes', async (req, res) => {
             try {
-            const recipes = await Recipe.find().populate('author', 'username');
-            res.status(200).json(recipes);
+                const recipes = await Recipe.find().populate('author', 'username');
+                res.status(200).json(recipes);
             } catch (err) {
-            console.error('Error fetching recipes:', err);
-            res.status(500).json({ message: 'Error fetching recipes' });
+                console.error('Error fetching recipes:', err);
+                res.status(500).json({ message: 'Error fetching recipes' });
             }
         });
 

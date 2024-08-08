@@ -3,6 +3,7 @@ import RecipeList from '../components/RecipeList';
 import { useQuery } from '@apollo/client';
 import { GET_RECIPES } from '../graphql/queries';
 import './Home.css';
+import loadingGif from '../../src/assets/loading.gif';
 
 const Home = () => {
     const [limit] = useState(10);
@@ -56,7 +57,7 @@ const Home = () => {
         });
     };
 
-    if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
+    if (loading) return <img src={loadingGif} alt="Loading..." className="loading-gif" />;
     if (error) return <p>Error: {error.message}</p>;
 
     console.log('Recipes state:', recipes);
@@ -66,7 +67,6 @@ const Home = () => {
 
     return (
         <div className="container">
-            <h1>The Charcuterie Board</h1>
             <RecipeList recipes={recipes} />
             <div className="pagination-buttons">
                 {hasPreviousRecipes && (

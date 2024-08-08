@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../graphql/mutations';
 import { saveToken } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import loadingGif from '../../src/assets/loading.gif';
 
 const Login = ({ setAuthenticated }) => {
     // Defining our setEmail method
@@ -60,7 +61,7 @@ const Login = ({ setAuthenticated }) => {
                 />
                 <button type="submit">Login</button>
             </form>
-            {loading && <p>Loading...</p>}
+            {loading && <img src={loadingGif} alt="Loading..." className="loading-gif" />}
             {error && <p>Error: {error.message}</p>}
         </div>
     );
