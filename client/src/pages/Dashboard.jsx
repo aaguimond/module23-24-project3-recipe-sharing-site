@@ -41,7 +41,7 @@ const Dashboard = () => {
         });
     };
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
     if (error) return <p>Error: {error.message}</p>;
 
     console.log('User recipes state:', userRecipes);
@@ -49,7 +49,7 @@ const Dashboard = () => {
     const allUserRecipesLoaded = userRecipes.length >= totalCount;
 
     return (
-        <div>
+        <div className="container">
             <h1>Your Recipes</h1>
             <RecipeList recipes={userRecipes} />
             {!allUserRecipesLoaded && (

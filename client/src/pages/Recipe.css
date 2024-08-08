@@ -31,6 +31,7 @@ strong {
 ul {
     list-style-type: none;
     padding: 0;
+    columns: 3;
 }
 
 li {
@@ -38,7 +39,7 @@ li {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
-    margin-bottom: 5px;
+    margin: 0 20px 0 20px;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -62,4 +63,16 @@ button:hover, .link-button:hover {
 
 .link-button {
     display: inline-block;
+}
+
+@media screen and (width < 920px) {
+    ul {
+        columns: 2;
+    }
+}
+
+@media screen and (width < 600px) {
+    ul {
+        columns: 1;
+    }
 }

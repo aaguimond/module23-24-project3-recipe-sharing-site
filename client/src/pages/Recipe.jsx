@@ -25,7 +25,7 @@ const Recipe = () => {
     const token = getToken();
     const userId = token ? JSON.parse(atob(token.split('.')[1])).userId : null;
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
     if (error) return <p>Error: {error.message}</p>;
 
     const { title, ingredients, instructions, author, image } = data.recipe;
@@ -41,10 +41,10 @@ const Recipe = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <img src={image} alt={title} />
             <h1>{title}</h1>
-            <p><strong>Author:</strong> {author.username}</p>
+            <p><strong className="author-title">Author:</strong> {author.username}</p>
             <div>
                 <strong>Ingredients:</strong>
                 <ul>

@@ -56,7 +56,7 @@ const Home = () => {
         });
     };
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
     if (error) return <p>Error: {error.message}</p>;
 
     console.log('Recipes state:', recipes);
@@ -65,7 +65,7 @@ const Home = () => {
     const hasPreviousRecipes = offset > 0;
 
     return (
-        <div>
+        <div className="container">
             <h1>The Charcuterie Board</h1>
             <RecipeList recipes={recipes} />
             <div className="pagination-buttons">

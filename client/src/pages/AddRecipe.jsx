@@ -4,7 +4,7 @@ import './AddRecipe.css';
 
 const AddRecipe = () => {
     return (
-        <div>
+        <div className="container">
             <h1>Add a new recipe</h1>
             <RecipeForm />
         </div>
