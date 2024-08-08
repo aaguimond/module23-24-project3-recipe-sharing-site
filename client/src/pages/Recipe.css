@@ -8,8 +8,8 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
     margin: 20px auto;
+    max-width: 2000px;
 }
 
 h1 {
@@ -40,7 +40,7 @@ li {
     border-radius: 4px;
     padding: 10px;
     margin: 0 20px 0 20px;
-    width: 100%;
+    width: 90%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -57,12 +57,28 @@ button, .link-button {
     text-align: center;
 }
 
+.update-button {
+    color: white;
+}
+
 button:hover, .link-button:hover {
     background-color: #133bb5;
 }
 
 .link-button {
     display: inline-block;
+}
+
+.button-container {
+    margin: 2%;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ingredients, .instructions {
+    width: 90%;
 }
 
 @media screen and (width < 920px) {
@@ -74,5 +90,8 @@ button:hover, .link-button:hover {
 @media screen and (width < 600px) {
     ul {
         columns: 1;
+    }
+    .ingredients, .instructions {
+        width: 80%;
     }
 }

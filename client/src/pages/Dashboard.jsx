@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_USER_RECIPES } from '../graphql/queries';
 import RecipeList from '../components/RecipeList';
+import loadingGif from '../../src/assets/loading.gif';
 
 const Dashboard = () => {
     const [limit] = useState(10);
@@ -41,7 +42,7 @@ const Dashboard = () => {
         });
     };
 
-    if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
+    if (loading) return <img src={loadingGif} alt="Loading..." className="loading-gif" />;
     if (error) return <p>Error: {error.message}</p>;
 
     console.log('User recipes state:', userRecipes);
@@ -50,7 +51,7 @@ const Dashboard = () => {
 
     return (
         <div className="container">
-            <h1>Your Recipes</h1>
+            <h1 className="dashboard-title">Your Recipes</h1>
             <RecipeList recipes={userRecipes} />
             {!allUserRecipesLoaded && (
                 <button onClick={loadMore}>Load More</button>

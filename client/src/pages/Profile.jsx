@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_USER_PROFILE } from '../graphql/queries';
 import './Profile.css'
+import loadingGif from '../../src/assets/loading.gif';
 
 // Render a user's profile
 const Profile = () => {
@@ -9,7 +10,7 @@ const Profile = () => {
     const { loading, error, data } = useQuery(GET_USER_PROFILE);
 
     // Displaying loading and error messages if needed
-    if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
+    if (loading) return <img src={loadingGif} alt="Loading..." className="loading-gif" />;
     if (error) return <p>Error: {error.message}</p>
 
     // Grabbing username and recipes from fetched data

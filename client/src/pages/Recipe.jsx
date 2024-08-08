@@ -5,6 +5,7 @@ import { DELETE_RECIPE } from '../graphql/mutations';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
 import './Recipe.css';
+import loadingGif from '../../src/assets/loading.gif';
 
 const Recipe = () => {
     const { id } = useParams();
@@ -25,7 +26,7 @@ const Recipe = () => {
     const token = getToken();
     const userId = token ? JSON.parse(atob(token.split('.')[1])).userId : null;
 
-    if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
+    if (loading) return <img src={loadingGif} alt="Loading..." className="loading-gif" />;
     if (error) return <p>Error: {error.message}</p>;
 
     const { title, ingredients, instructions, author, image } = data.recipe;
@@ -45,7 +46,7 @@ const Recipe = () => {
             <img src={image} alt={title} />
             <h1>{title}</h1>
             <p><strong className="author-title">Author:</strong> {author.username}</p>
-            <div>
+            <div className="ingredients">
                 <strong>Ingredients:</strong>
                 <ul>
                     {ingredients.map((ingredient, index) => (
@@ -55,15 +56,15 @@ const Recipe = () => {
                     ))}
                 </ul>
             </div>
-            <div>
+            <div className='instructions'>
                 <strong>Instructions:</strong>
                 <p>{instructions}</p>
             </div>
             {userId === author.id && (
-                <>
-                    <Link to={`/update-recipe/${id}`}>Update Recipe</Link>
+                <div className='button-container'>
+                    <button><Link className='update-button' to={`/update-recipe/${id}`}>Update Recipe</Link></button>
                     <button onClick={handleDelete}>Delete Recipe</button>
-                </>
+                </div>
             )}
         </div>
     );

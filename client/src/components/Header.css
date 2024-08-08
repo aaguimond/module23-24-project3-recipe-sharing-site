@@ -1,0 +1,76 @@
+.banner-image {
+    border: 4px solid rgb(15, 10, 33);
+    max-height: 300px;
+    max-width: fit-content;
+    border-radius: 5px;
+}
+
+.banner-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 2% 0 2%;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: right;
+    font-size: 1.5rem;
+}
+
+@media screen and (width < 1100px) {
+    .banner-image {
+        max-height: 250px;
+    }
+}
+
+@media screen and (width < 960px) {
+    .banner-image {
+        max-height: 225px;
+    }
+    nav {
+        font-size: 1.2rem;
+    }
+    .banner-container {
+        margin: 0 1.5% 0 1.5%;
+    }
+}
+
+@media screen and (width < 850px) {
+    .banner-image {
+        max-height: 200px;
+    }
+    nav {
+        font-size: 1rem;
+    }
+    .banner-container {
+        margin: 0 1% 0 1%;
+    }
+}
+
+@media screen and (width < 850px) {
+    .banner-image {
+        max-height: 200px;
+    }
+    nav {
+        font-size: 1rem;
+    }
+    .banner-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    nav {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+@media screen and (width < 480px) {
+    nav {
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+    }
+}

@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { GET_RECIPE_BY_ID } from '../graphql/queries';
 import { UPDATE_RECIPE } from '../graphql/mutations';
 import { useParams, useNavigate } from 'react-router-dom';
+import loadingGif from '../../src/assets/loading.gif';
 
 const RecipeUpdateForm = () => {
   const { id } = useParams();
@@ -60,7 +61,7 @@ const RecipeUpdateForm = () => {
     setIngredients([...ingredients, { name: '', quantity: '' }]);
   };
 
-  if (loading) return <img src="/loading.gif" alt="Loading..." className="loading-gif" />;
+  if (loading) return <img src={loadingGif} alt="Loading..." className="loading-gif" />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (

@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { REGISTER_USER } from '../graphql/mutations';
 import { saveToken } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import loadingGif from '../../src/assets/loading.gif';
 
 const Register = ({ setAuthenticated }) => {
     // Defining our setUsername method
@@ -66,7 +67,7 @@ const Register = ({ setAuthenticated }) => {
                 />
                 <button type="submit">Register</button>
             </form>
-            {loading && <p>Loading...</p>}
+            {loading && <img src={loadingGif} alt="Loading..." className="loading-gif" />}
             {error && <p>Error: {error.message}</p>}
         </div>
     );
