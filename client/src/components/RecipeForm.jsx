@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_RECIPE } from '../graphql/mutations';
+import { useNavigate } from 'react-router-dom';
 
 const RecipeForm = () => {
   const [title, setTitle] = useState('');
@@ -9,6 +10,8 @@ const RecipeForm = () => {
   const [image, setImage] = useState('');
 
   const [createRecipe] = useMutation(CREATE_RECIPE);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +32,8 @@ const RecipeForm = () => {
       setIngredients([{ name: '', quantity: '' }]);
       setInstructions('');
       setImage('');
+
+      navigate('/');
 
     } catch (err) {
       console.error('Error creating recipe:', err);
