@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RecipeList from '../components/RecipeList';
 import { useQuery } from '@apollo/client';
 import { GET_RECIPES } from '../graphql/queries';
@@ -11,7 +11,7 @@ const Home = () => {
     const [recipes, setRecipes] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
 
-    const { loading, error, data, fetchMore } = useQuery(GET_RECIPES, {
+    const { loading, error, data, fetchMore, refetch } = useQuery(GET_RECIPES, {
         variables: { limit, offset },
         onCompleted: (data) => {
             if (data && data.getRecipes) {
@@ -21,6 +21,10 @@ const Home = () => {
             }
         }
     });
+
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
 
     const loadMore = () => {
         fetchMore({
