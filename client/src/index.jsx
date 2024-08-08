@@ -12,7 +12,7 @@ import App from "./App";
 
 // Create a http link to GraphQL server
 const httpLink = createHttpLink({
-  uri: "http://localhost:3000/graphql",
+  uri: "http://localhost:10000/graphql",
 });
 
 // Create middleware link to set the HTTP headers for each request
