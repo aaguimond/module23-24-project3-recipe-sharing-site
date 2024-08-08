@@ -1,21 +1,20 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_RECIPE_BY_ID } from '../graphql/queries';
-import { DELETE_RECIPE } from '../graphql/mutations';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { GET_RECIPE_BY_ID, DELETE_RECIPE } from '../graphql/queries';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getToken } from '../utils/auth';
 import './Recipe.css';
 
 const Recipe = () => {
     const { id } = useParams();
-    const history = useHistory();
+    const navigate = useNavigate();
     const { loading, error, data } = useQuery(GET_RECIPE_BY_ID, {
         variables: { id }
     });
 
     const [deleteRecipe] = useMutation(DELETE_RECIPE, {
         onCompleted: () => {
-            history.push('/');
+            navigate('/');
         },
         onError: (error) => {
             console.error('Error deleting recipe:', error.message);
