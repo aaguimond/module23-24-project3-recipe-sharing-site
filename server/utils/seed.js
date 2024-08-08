@@ -70,7 +70,7 @@ const recipes = [
         ],
         instructions: "Cook spaghetti according to directions on box. Fry the pancetta in a pan. Beat the eggs and cheese together. Save 1/2 cup of hot pasta water and drain pasta when it's finished cooking. Remove pancetta from heat once crispy and brown. Combine the pasta, pancetta, pepper, salt, and egg and cheese mixture. Add hot pasta water if the sauce is too thick. Enjoy!",
         author: "chefgoldblum",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/9qZnide.jpeg"
     },
     {
         title: "Chicken Curry",
@@ -86,7 +86,7 @@ const recipes = [
         ],
         instructions: "Saute onions, garlic, and ginger. Add chicken and cook. Add tomatoes and curry powder. Stir in coconut milk and simmer.",
         author: "sir_ieatalot",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/4IIV3xD.jpeg"
     },
     {
         title: "Vegetable Stir Fry",
@@ -102,7 +102,7 @@ const recipes = [
         ],
         instructions: "Chop vegetables. Heat oil in a pan and saute garlic. Add vegetables and stir fry. Add soy sauce, salt, and pepper.",
         author: "foodfan4",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/D2a2Zw3.jpeg"
     },
     {
         title: "Pancakes",
@@ -116,7 +116,7 @@ const recipes = [
         ],
         instructions: "Mix all ingredients to form a batter. Heat a pan and pour batter to form pancakes. Cook until golden brown.",
         author: "janeyd",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/BFiCLvM.jpeg"
     },
     {
         title: "Beef Tacos",
@@ -132,7 +132,7 @@ const recipes = [
         ],
         instructions: "Cook ground beef with taco seasoning. Warm tortillas. Assemble tacos with beef, lettuce, tomato, cheese, sour cream, and salsa.",
         author: "jimmyd",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/hNr4r1v.jpeg"
     },
     {
         title: "Caesar Salad",
@@ -145,7 +145,7 @@ const recipes = [
         ],
         instructions: "Chop lettuce. Toss with dressing, cheese, and croutons. Top with grilled chicken.",
         author: "jimbob",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/lFGRjXT.jpeg"
     },
     {
         title: "Chocolate Chip Cookies",
@@ -162,7 +162,7 @@ const recipes = [
         ],
         instructions: "Cream butter and sugars. Add eggs and vanilla. Mix in dry ingredients. Stir in chocolate chips. Drop by spoonfuls onto baking sheet. Bake at 350°F for 10-12 minutes.",
         author: "cookincookies",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/Y9HUijy.jpeg"
     },
     {
         title: "Vegetable Soup",
@@ -180,7 +180,7 @@ const recipes = [
         ],
         instructions: "Saute onion and garlic. Add remaining vegetables and broth. Bring to a boil, then simmer until vegetables are tender. Season with salt and pepper.",
         author: "chefgoldblum",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/YEKf9IH.jpeg"
     },
     {
         title: "Chicken Alfredo",
@@ -196,7 +196,7 @@ const recipes = [
         ],
         instructions: "Cook fettuccine. Saute chicken and garlic in butter. Add cream and cheese, stirring until thickened. Toss with pasta. Season with salt and pepper.",
         author: "chefgoldblum",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/bsuC7cA.jpeg"
     },
     {
         title: "Mango Smoothie",
@@ -209,7 +209,7 @@ const recipes = [
         ],
         instructions: "Blend all ingredients until smooth. Serve chilled.",
         author: "janeyd",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/s5Xl9iw.jpeg"
     },
     {
         title: "Shrimp Scampi",
@@ -226,7 +226,7 @@ const recipes = [
         ],
         instructions: "Cook spaghetti. Saute garlic in butter. Add shrimp, lemon juice, and wine. Cook until shrimp is done. Toss with pasta and parsley. Season with salt and pepper.",
         author: "foodfan4",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/a3A0jmJ.jpeg"
     },
     {
         title: "BBQ Chicken Pizza",
@@ -240,7 +240,7 @@ const recipes = [
         ],
         instructions: "Roll out dough. Spread BBQ sauce over dough. Top with chicken, cheese, and onion. Bake at 425°F for 15-20 minutes. Sprinkle with cilantro.",
         author: "chefgoldblum",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/MWnE10e.jpeg"
     },
     {
         title: "Garlic Bread",
@@ -253,7 +253,7 @@ const recipes = [
         ],
         instructions: "Mix butter, garlic, parsley, and cheese. Spread on sliced baguette. Bake at 350°F for 10-15 minutes until golden.",
         author: "sir_ieatalot",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/4hyzzNX.jpeg"
     },
     {
         title: "Blueberry Muffins",
@@ -269,7 +269,7 @@ const recipes = [
         ],
         instructions: "Mix dry ingredients. Add egg, milk, and oil. Fold in blueberries. Spoon into muffin tin. Bake at 375°F for 20-25 minutes.",
         author: "foodfan4",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/BuUuS8R.jpeg"
     },
     {
         title: "crisco",
@@ -279,7 +279,7 @@ const recipes = [
         ],
         instructions: "add crisco to crisco. drink.",
         author: "criscodrinker",
-        image: "https://i.imgur.com/frqvKRY.jpeg"
+        image: "https://i.imgur.com/3ozJ1XD.jpg"
     }
 ];
 
