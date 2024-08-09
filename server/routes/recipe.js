@@ -82,7 +82,7 @@ router.put('/recipes/:recipeID', authMiddleware, async (req, res) => {
         }
 
         // if the user attempting to modify the recipe isn't the author, return error
-        if (recipe.author.toString() !== req.user._id) {
+        if (recipe.author.toString() !== req.user._id.toString()) {
             return res.status(403).json({ message: 'You are not authorized to update this recipe.' });
         }
 
