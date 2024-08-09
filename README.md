@@ -86,7 +86,7 @@ reccomended to install Visual Studio code as well.
 <!-- USAGE EXAMPLES -->
 ## Link to Deployed Application
 
-_Here is a link to our [Deployed Site](https://stvrmrz.github.io/Challenge-06-Weather-Dashboard/)_
+_Here is a link to our [Deployed Site](https://the-charcuterie-board.onrender.com/)_
 
 <!-- ROADMAP -->
 ## Roadmap
